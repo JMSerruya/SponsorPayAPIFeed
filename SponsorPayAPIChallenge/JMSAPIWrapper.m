@@ -29,7 +29,7 @@ static JMSAPIWrapper *apiInstance = nil;
 - (void)requestOffersFromAPI:(NSDictionary *)params callback:(CompletionBlock)callback{
 
     NSString *request = [NSString stringWithFormat:@"http://api.sponsorpay.com/feed/v1/offers.json"];
-    [self performRequest:request parameters:nil callback:^(BOOL success, NSData *response, NSError *error) {
+    [self performRequest:request parameters:params callback:^(BOOL success, NSData *response, NSError *error) {
         callback(success, response, error);
     }];
 

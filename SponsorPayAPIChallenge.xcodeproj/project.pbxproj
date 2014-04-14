@@ -23,6 +23,8 @@
 		6669DACE18FBD1AC00E441B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6669DACC18FBD1AC00E441B9 /* InfoPlist.strings */; };
 		6669DAD018FBD1AC00E441B9 /* SponsorPayAPIChallengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6669DACF18FBD1AC00E441B9 /* SponsorPayAPIChallengeTests.m */; };
 		6675A65F18FBD3130074050C /* JMSAPIWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A65E18FBD3130074050C /* JMSAPIWrapper.m */; };
+		6675A66318FBDA190074050C /* JMSResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A66218FBDA190074050C /* JMSResultsViewController.m */; };
+		6675A66518FBDCC40074050C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6675A66418FBDCC40074050C /* AdSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,9 @@
 		6669DACF18FBD1AC00E441B9 /* SponsorPayAPIChallengeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SponsorPayAPIChallengeTests.m; sourceTree = "<group>"; };
 		6675A65D18FBD3130074050C /* JMSAPIWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSAPIWrapper.h; sourceTree = "<group>"; };
 		6675A65E18FBD3130074050C /* JMSAPIWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSAPIWrapper.m; sourceTree = "<group>"; };
+		6675A66118FBDA190074050C /* JMSResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSResultsViewController.h; sourceTree = "<group>"; };
+		6675A66218FBDA190074050C /* JMSResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSResultsViewController.m; sourceTree = "<group>"; };
+		6675A66418FBDCC40074050C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6997CF585CA0432EB98533D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -66,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6675A66518FBDCC40074050C /* AdSupport.framework in Frameworks */,
 				6669DAA718FBD1AC00E441B9 /* CoreGraphics.framework in Frameworks */,
 				6669DAA918FBD1AC00E441B9 /* UIKit.framework in Frameworks */,
 				6669DAA518FBD1AC00E441B9 /* Foundation.framework in Frameworks */,
@@ -109,6 +115,7 @@
 		6669DAA318FBD1AC00E441B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6675A66418FBDCC40074050C /* AdSupport.framework */,
 				6669DAA418FBD1AC00E441B9 /* Foundation.framework */,
 				6669DAA618FBD1AC00E441B9 /* CoreGraphics.framework */,
 				6669DAA818FBD1AC00E441B9 /* UIKit.framework */,
@@ -121,12 +128,11 @@
 		6669DAAA18FBD1AC00E441B9 /* SponsorPayAPIChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				6675A66018FBD9FA0074050C /* ViewControllers */,
 				6675A65C18FBD2FE0074050C /* API */,
 				6669DAB318FBD1AC00E441B9 /* JMSAppDelegate.h */,
 				6669DAB418FBD1AC00E441B9 /* JMSAppDelegate.m */,
 				6669DAB618FBD1AC00E441B9 /* Main.storyboard */,
-				6669DAB918FBD1AC00E441B9 /* JMSViewController.h */,
-				6669DABA18FBD1AC00E441B9 /* JMSViewController.m */,
 				6669DABC18FBD1AC00E441B9 /* Images.xcassets */,
 				6669DAAB18FBD1AC00E441B9 /* Supporting Files */,
 			);
@@ -169,6 +175,17 @@
 				6675A65E18FBD3130074050C /* JMSAPIWrapper.m */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		6675A66018FBD9FA0074050C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6669DAB918FBD1AC00E441B9 /* JMSViewController.h */,
+				6669DABA18FBD1AC00E441B9 /* JMSViewController.m */,
+				6675A66118FBDA190074050C /* JMSResultsViewController.h */,
+				6675A66218FBDA190074050C /* JMSResultsViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +325,7 @@
 				6669DAB118FBD1AC00E441B9 /* main.m in Sources */,
 				6669DAB518FBD1AC00E441B9 /* JMSAppDelegate.m in Sources */,
 				6675A65F18FBD3130074050C /* JMSAPIWrapper.m in Sources */,
+				6675A66318FBDA190074050C /* JMSResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
