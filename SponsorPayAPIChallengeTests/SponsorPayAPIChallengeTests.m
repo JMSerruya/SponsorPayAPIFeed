@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "JMSAPIWrapper.h"
 
 @interface SponsorPayAPIChallengeTests : XCTestCase
 
@@ -26,8 +27,9 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testAPIWrapperWithNilParameters
 {
+    [[JMSAPIWrapper instance] requestOffersFromAPI:nil callback:nil];
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
