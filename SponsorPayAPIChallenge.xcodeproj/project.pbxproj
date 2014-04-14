@@ -27,6 +27,7 @@
 		6675A66518FBDCC40074050C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6675A66418FBDCC40074050C /* AdSupport.framework */; };
 		6675A66918FBE4C10074050C /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A66818FBE4C10074050C /* NSString+Hashes.m */; };
 		6675A66E18FC1E3F0074050C /* JMSOfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A66D18FC1E3F0074050C /* JMSOfferCell.m */; };
+		6679D58618FC224000F0C50C /* OfferFeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6679D58518FC224000F0C50C /* OfferFeedItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		6675A66818FBE4C10074050C /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
 		6675A66C18FC1E3F0074050C /* JMSOfferCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSOfferCell.h; sourceTree = "<group>"; };
 		6675A66D18FC1E3F0074050C /* JMSOfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSOfferCell.m; sourceTree = "<group>"; };
+		6679D58518FC224000F0C50C /* OfferFeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfferFeedItem.xib; sourceTree = "<group>"; };
 		6997CF585CA0432EB98533D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -209,6 +211,7 @@
 		6675A66A18FC1D690074050C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6679D58518FC224000F0C50C /* OfferFeedItem.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6679D58618FC224000F0C50C /* OfferFeedItem.xib in Resources */,
 				6669DABD18FBD1AC00E441B9 /* Images.xcassets in Resources */,
 				6669DAAF18FBD1AC00E441B9 /* InfoPlist.strings in Resources */,
 				6669DAB818FBD1AC00E441B9 /* Main.storyboard in Resources */,

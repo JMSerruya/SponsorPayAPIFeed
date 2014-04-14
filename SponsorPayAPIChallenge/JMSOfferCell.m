@@ -7,6 +7,7 @@
 //
 
 #import "JMSOfferCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation JMSOfferCell
 
@@ -24,6 +25,15 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setData:(NSDictionary*)data
+{
+    self.title.text = [data objectForKey:@"title"];
+    [self.thumb setImageWithURL:[NSURL URLWithString:[[data objectForKey:@"thumbnail"] objectForKey:@"hires"]]
+                      placeholderImage:nil];
+    self.payout.text = [NSString stringWithFormat:@"Payout: %@", [data objectForKey:@"payout"]];
+    self.teaser.text = [data objectForKey:@"teaser"];
 }
 
 @end

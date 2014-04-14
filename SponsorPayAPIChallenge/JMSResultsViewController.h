@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface JMSResultsViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *thumb;
+@property (strong, nonatomic) IBOutlet UILabel *teaserLabel;
+@property (strong, nonatomic) IBOutlet UILabel *payoutLabel;
 
 @end

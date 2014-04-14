@@ -9,6 +9,7 @@
 #import "JMSResultsViewController.h"
 #import "JMSAPIWrapper.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "JMSOfferCell.h"
 
 @interface JMSResultsViewController ()
 
@@ -32,6 +33,8 @@ NSMutableArray *_results;
     [super viewDidLoad];
 
     [SVProgressHUD showWithStatus:@"Requesting"];
+    UINib * feedCellNib = [UINib nibWithNibName:@"OfferFeedItem" bundle:nil];
+    [self.tableView registerNib:feedCellNib forCellReuseIdentifier:@"JMSOfferCell"];
     NSMutableDictionary* params = [[JMSAPIWrapper instance] generateRequestParamsWithDictionary:nil];
     [[JMSAPIWrapper instance] requestOffersFromAPI:params callback:^(BOOL success, NSDictionary *response, NSError *error) {
         if(success) {
@@ -63,10 +66,17 @@ NSMutableArray *_results;
     return _results.count;
 }
 
+- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    JMSOfferCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"JMSOfferCell" forIndexPath:indexPath];
+    [cell setData:[_results objectAtIndex:indexPath.row]];
+    return cell;
+
     
     // Configure the cell...
     
