@@ -31,13 +31,27 @@ static JMSAPIWrapper *apiInstance = nil;
 
 - (void)requestOffersFromAPI:(NSMutableDictionary *)params callback:(CompletionBlock)callback{
 
-    NSString *request = [NSString stringWithFormat:@"http://api.sponsorpay.com/feed/v1/offers.json"];
-    [params removeObjectForKey:@"format"];
-    NSLog(@"%@", params);
-    [self performRequest:request parameters:params callback:^(BOOL success, NSData *response, NSError *error) {
+    NSString *request = [NSString stringWithFormat:@"http://api.sponsorpay.com/feed/v1/offers.json?"];
+    [params removeObjectForKey:@"apikey"];
+    request = [self createURLWithBaseURL:request andParams:params];
+    [self performRequest:request parameters:params callback:^(BOOL success, NSDictionary *response, NSError *error) {
         callback(success, response, error);
     }];
 
+}
+
+-(NSString*)createURLWithBaseURL:(NSString*)url andParams:(NSMutableDictionary*)params{
+
+    NSArray * keys = [params allKeys];
+    NSArray * objects = [params objectsForKeys:keys notFoundMarker: [NSNull null]];
+    //get keys for those objects and start creating the string
+    for(id object in objects) {
+        NSArray *temp = [params allKeysForObject:object];
+        NSString *key = [temp objectAtIndex:0];
+        url = [NSString stringWithFormat:@"%@%@=%@&", url, key, object];
+    }
+
+    return url;
 }
 
 #pragma mark -
@@ -74,14 +88,14 @@ static JMSAPIWrapper *apiInstance = nil;
     [resultParams setObject:@"DE" forKey:@"locale"];
     [resultParams setObject:@"spiderman" forKey:@"uid"];
     [resultParams setObject:@"109.235.143.113" forKey:@"ip"];
-    [resultParams setObject:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString] forKey:@"apple_idfa"];
+    [resultParams setObject:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString] forKey:@"device_id"];
     [resultParams setObject:@"1c915e3b5d42d05136185030892fbb846c278927" forKey:@"apikey"];
     NSTimeInterval  now = [[NSDate date] timeIntervalSince1970];
     NSString *intervalString = [NSString stringWithFormat:@"%f", now];
     [resultParams setObject:intervalString forKey:@"timestamp"];
     [resultParams setObject:@"112" forKey:@"offer_types"];
 
-    [resultParams setObject:[self generateHashkeyWithDictionary:params] forKey:@"hashkey"];
+    [resultParams setObject:[self generateHashkeyWithDictionary:resultParams] forKey:@"hashkey"];
     return resultParams;
 }
 

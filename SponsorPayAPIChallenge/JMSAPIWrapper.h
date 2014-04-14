@@ -11,7 +11,7 @@
 
 @interface JMSAPIWrapper : NSObject
 
-typedef void(^CompletionBlock)(BOOL success, NSData * response, NSError * error );
+typedef void(^CompletionBlock)(BOOL success, NSDictionary * response, NSError * error );
 +(id)instance;
 @property (nonatomic,strong) AFHTTPRequestSerializer * requestSerializer;
 - (void)requestOffersFromAPI:(NSMutableDictionary*)params callback:(CompletionBlock)callback;

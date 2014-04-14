@@ -16,11 +16,13 @@
 
 @implementation JMSResultsViewController
 
+NSMutableArray *_results;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-
+        _results = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -31,9 +33,10 @@
 
     [SVProgressHUD showWithStatus:@"Requesting"];
     NSMutableDictionary* params = [[JMSAPIWrapper instance] generateRequestParamsWithDictionary:nil];
-    [[JMSAPIWrapper instance] requestOffersFromAPI:params callback:^(BOOL success, NSData *response, NSError *error) {
+    [[JMSAPIWrapper instance] requestOffersFromAPI:params callback:^(BOOL success, NSDictionary *response, NSError *error) {
         if(success) {
-            NSLog(@"%@", response);
+            _results = [response objectForKey:@"offers"];
+            [self.tableView reloadData];
             [SVProgressHUD dismiss];
         } else {
             NSLog(@"%@", error.description);
@@ -52,16 +55,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return _results.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
