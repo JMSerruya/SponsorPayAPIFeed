@@ -25,6 +25,7 @@
 		6675A65F18FBD3130074050C /* JMSAPIWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A65E18FBD3130074050C /* JMSAPIWrapper.m */; };
 		6675A66318FBDA190074050C /* JMSResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A66218FBDA190074050C /* JMSResultsViewController.m */; };
 		6675A66518FBDCC40074050C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6675A66418FBDCC40074050C /* AdSupport.framework */; };
+		6675A66918FBE4C10074050C /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6675A66818FBE4C10074050C /* NSString+Hashes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		6675A66118FBDA190074050C /* JMSResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSResultsViewController.h; sourceTree = "<group>"; };
 		6675A66218FBDA190074050C /* JMSResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSResultsViewController.m; sourceTree = "<group>"; };
 		6675A66418FBDCC40074050C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		6675A66718FBE4C10074050C /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
+		6675A66818FBE4C10074050C /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
 		6997CF585CA0432EB98533D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,6 +131,7 @@
 		6669DAAA18FBD1AC00E441B9 /* SponsorPayAPIChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				6675A66618FBE48F0074050C /* Support */,
 				6675A66018FBD9FA0074050C /* ViewControllers */,
 				6675A65C18FBD2FE0074050C /* API */,
 				6669DAB318FBD1AC00E441B9 /* JMSAppDelegate.h */,
@@ -186,6 +190,15 @@
 				6675A66218FBDA190074050C /* JMSResultsViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6675A66618FBE48F0074050C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				6675A66718FBE4C10074050C /* NSString+Hashes.h */,
+				6675A66818FBE4C10074050C /* NSString+Hashes.m */,
+			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +339,7 @@
 				6669DAB518FBD1AC00E441B9 /* JMSAppDelegate.m in Sources */,
 				6675A65F18FBD3130074050C /* JMSAPIWrapper.m in Sources */,
 				6675A66318FBDA190074050C /* JMSResultsViewController.m in Sources */,
+				6675A66918FBE4C10074050C /* NSString+Hashes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

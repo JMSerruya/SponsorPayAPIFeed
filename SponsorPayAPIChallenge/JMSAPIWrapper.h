@@ -14,6 +14,8 @@
 typedef void(^CompletionBlock)(BOOL success, NSData * response, NSError * error );
 +(id)instance;
 @property (nonatomic,strong) AFHTTPRequestSerializer * requestSerializer;
-- (void)requestOffersFromAPI:(NSDictionary*)params callback:(CompletionBlock)callback;
+- (void)requestOffersFromAPI:(NSMutableDictionary*)params callback:(CompletionBlock)callback;
+
+-(NSMutableDictionary*) generateRequestParamsWithDictionary:(NSMutableDictionary*)params;
 
 @end

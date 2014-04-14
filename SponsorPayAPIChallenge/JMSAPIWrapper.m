@@ -8,6 +8,9 @@
 
 #import "JMSAPIWrapper.h"
 #import "AFNetworking.h"
+#import <CommonCrypto/CommonDigest.h>
+#import "NSString+Hashes.h"
+#import <AdSupport/ASIdentifierManager.h>
 
 @implementation JMSAPIWrapper
 
@@ -26,9 +29,11 @@ static JMSAPIWrapper *apiInstance = nil;
 
 #pragma mark -
 
-- (void)requestOffersFromAPI:(NSDictionary *)params callback:(CompletionBlock)callback{
+- (void)requestOffersFromAPI:(NSMutableDictionary *)params callback:(CompletionBlock)callback{
 
     NSString *request = [NSString stringWithFormat:@"http://api.sponsorpay.com/feed/v1/offers.json"];
+    [params removeObjectForKey:@"format"];
+    NSLog(@"%@", params);
     [self performRequest:request parameters:params callback:^(BOOL success, NSData *response, NSError *error) {
         callback(success, response, error);
     }];
@@ -60,4 +65,52 @@ static JMSAPIWrapper *apiInstance = nil;
     }];
     [operation start];
 }
+
+-(NSMutableDictionary*) generateRequestParamsWithDictionary:(NSMutableDictionary*)params {
+    NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
+
+    [resultParams setObject:@"json" forKey:@"format"];
+    [resultParams setObject:@"2070" forKey:@"appid"];
+    [resultParams setObject:@"DE" forKey:@"locale"];
+    [resultParams setObject:@"spiderman" forKey:@"uid"];
+    [resultParams setObject:@"109.235.143.113" forKey:@"ip"];
+    [resultParams setObject:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString] forKey:@"apple_idfa"];
+    [resultParams setObject:@"1c915e3b5d42d05136185030892fbb846c278927" forKey:@"apikey"];
+    NSTimeInterval  now = [[NSDate date] timeIntervalSince1970];
+    NSString *intervalString = [NSString stringWithFormat:@"%f", now];
+    [resultParams setObject:intervalString forKey:@"timestamp"];
+    [resultParams setObject:@"112" forKey:@"offer_types"];
+
+    [resultParams setObject:[self generateHashkeyWithDictionary:params] forKey:@"hashkey"];
+    return resultParams;
+}
+
+-(NSString*) generateHashkeyWithDictionary:(NSMutableDictionary*)params {
+    //sort Dictionary by Keys
+    NSArray * sortedKeys = [[params allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+
+    NSArray * objects = [params objectsForKeys: sortedKeys notFoundMarker: [NSNull null]];
+    //get keys for those objects and start creating the string
+    NSString* hash = [[NSString alloc] init];
+    for(id object in objects) {
+        NSArray *temp = [params allKeysForObject:object];
+        NSString *key = [temp objectAtIndex:0];
+        //ignore the apikeyObject
+        if(![key isEqualToString:@"apikey"]) {
+            hash = [NSString stringWithFormat:@"%@%@=%@&", hash, key, object];
+        }
+    }
+
+    //finally add the APIkey
+
+    hash = [NSString stringWithFormat:@"%@%@", hash, [params objectForKey:@"apikey"]];
+
+    NSLog(@"%@", hash);
+
+    //NSLog(@"%@", objects);
+    return [hash sha1];
+    
+}
+
+
 @end
