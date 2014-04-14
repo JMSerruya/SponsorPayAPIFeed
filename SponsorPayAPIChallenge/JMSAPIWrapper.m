@@ -101,6 +101,13 @@ static JMSAPIWrapper *apiInstance = nil;
 }
 
 -(NSMutableDictionary*) generateRequestParamsWithDictionary:(NSMutableDictionary*)params {
+     if (params == nil) {
+     //if nil add default values.
+         params = [[NSMutableDictionary alloc] init];
+         [params setObject:@"2070" forKey:@"appid"];
+         [params setObject:@"spiderman" forKey:@"uid"];
+         [params setObject:@"1c915e3b5d42d05136185030892fbb846c278927" forKey:@"appid"];
+     }
     //JMS hardcoding stuff
     [params setObject:@"json" forKey:@"format"];
     [params setObject:@"DE" forKey:@"locale"];

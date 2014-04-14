@@ -27,10 +27,9 @@
     [super tearDown];
 }
 
-- (void)testAPIWrapperWithNilParameters
+- (void)testAPIWrapperRequestParamsWithNilDictionary
 {
-    [[JMSAPIWrapper instance] requestOffersFromAPI:nil callback:nil];
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    XCTAssertNotNil([[JMSAPIWrapper instance] generateRequestParamsWithDictionary:nil]);
 }
 
 @end
