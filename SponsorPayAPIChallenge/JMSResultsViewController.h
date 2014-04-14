@@ -13,5 +13,5 @@
 @property (strong, nonatomic) IBOutlet UIImageView *thumb;
 @property (strong, nonatomic) IBOutlet UILabel *teaserLabel;
 @property (strong, nonatomic) IBOutlet UILabel *payoutLabel;
-
+@property (strong, nonatomic) NSMutableDictionary* params;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "JMSViewController.h"
+#import "JMSResultsViewController.h"
 
 @interface JMSViewController ()
 
@@ -38,7 +39,6 @@
 }
 
 
-
 // called when click on the retun button.
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -57,6 +57,17 @@
     }
 
     return NO;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    JMSResultsViewController *vc = [segue destinationViewController];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:self.uidTextField.text forKey:@"uid"];
+    [params setObject:self.apikeyTextField.text forKey:@"apikey"];
+    [params setObject:self.appidTextField.text forKey:@"appid"];
+    [params setObject:self.pub0TextField.text forKey:@"pub0"];
+    [vc setParams:params];
 }
 
 @end

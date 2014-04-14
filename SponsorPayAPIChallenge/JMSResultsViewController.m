@@ -35,7 +35,7 @@ NSMutableArray *_results;
     [SVProgressHUD showWithStatus:@"Requesting"];
     UINib * feedCellNib = [UINib nibWithNibName:@"OfferFeedItem" bundle:nil];
     [self.tableView registerNib:feedCellNib forCellReuseIdentifier:@"JMSOfferCell"];
-    NSMutableDictionary* params = [[JMSAPIWrapper instance] generateRequestParamsWithDictionary:nil];
+    NSMutableDictionary* params = [[JMSAPIWrapper instance] generateRequestParamsWithDictionary:self.params];
     [[JMSAPIWrapper instance] requestOffersFromAPI:params callback:^(BOOL success, NSDictionary *response, NSError *error) {
         if(success) {
             _results = [response objectForKey:@"offers"];
