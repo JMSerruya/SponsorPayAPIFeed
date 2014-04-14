@@ -42,7 +42,6 @@ NSMutableArray *_results;
             [self.tableView reloadData];
             [SVProgressHUD dismiss];
         } else {
-            NSLog(@"%@", error.description);
             [SVProgressHUD dismiss];
         }
     }];
@@ -72,14 +71,8 @@ NSMutableArray *_results;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     JMSOfferCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"JMSOfferCell" forIndexPath:indexPath];
     [cell setData:[_results objectAtIndex:indexPath.row]];
-    return cell;
-
-    
-    // Configure the cell...
-    
     return cell;
 }
 @end

@@ -32,9 +32,12 @@ static JMSAPIWrapper *apiInstance = nil;
 - (void)requestOffersFromAPI:(NSMutableDictionary *)params callback:(CompletionBlock)callback{
 
     NSString *request = [NSString stringWithFormat:@"http://api.sponsorpay.com/feed/v1/offers.json?"];
+    self.apiKey = [params objectForKey:@"apikey"];
+    self.hash = [params objectForKey:@"hashkey"];
     [params removeObjectForKey:@"apikey"];
     request = [self createURLWithBaseURL:request andParams:params];
     [self performRequest:request parameters:params callback:^(BOOL success, NSDictionary *response, NSError *error) {
+        NSLog(@"%@", response);
         callback(success, response, error);
     }];
 
@@ -65,7 +68,15 @@ static JMSAPIWrapper *apiInstance = nil;
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (callback != nil) callback(TRUE,responseObject,nil);
+        NSDictionary *responseHeaders =  [[operation response] allHeaderFields];
+        NSString *responseSignature = [responseHeaders objectForKey:@"X-Sponsorpay-Response-Signature"];
+        if ([self validateResponseWithSignature:responseSignature andBody:[operation responseString]]) {
+            if (callback != nil) callback(TRUE,responseObject,nil);
+        } else {
+            NSLog(@"INVALID RESPONSE, return nil anyway, should probably create an instance of NSerror :D");
+            if (callback != nil) callback(FALSE,nil,nil);
+        }
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @try {
             if (operation.response.statusCode == 404) {
@@ -80,8 +91,17 @@ static JMSAPIWrapper *apiInstance = nil;
     [operation start];
 }
 
--(NSMutableDictionary*) generateRequestParamsWithDictionary:(NSMutableDictionary*)params {
+-(BOOL)validateResponseWithSignature:(NSString*)responseSignature andBody:(NSString*)body {
+    NSString *concatString = [NSString stringWithFormat:@"%@%@", body, self.apiKey];
+    NSString *hashedString = [concatString sha1];
+    if([responseSignature isEqualToString:hashedString]){
+        return YES;
+    }
+    return NO;
+}
 
+-(NSMutableDictionary*) generateRequestParamsWithDictionary:(NSMutableDictionary*)params {
+    //JMS hardcoding stuff
     [params setObject:@"json" forKey:@"format"];
     [params setObject:@"DE" forKey:@"locale"];
     [params setObject:@"109.235.143.113" forKey:@"ip"];
@@ -112,12 +132,8 @@ static JMSAPIWrapper *apiInstance = nil;
     }
 
     //finally add the APIkey
-
     hash = [NSString stringWithFormat:@"%@%@", hash, [params objectForKey:@"apikey"]];
 
-    NSLog(@"%@", hash);
-
-    //NSLog(@"%@", objects);
     return [hash sha1];
     
 }
